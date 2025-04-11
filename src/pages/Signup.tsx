@@ -9,6 +9,9 @@ import { useToast } from "@/components/ui/use-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
+// Define account type as a type for better type safety
+type AccountType = "renter" | "carOwner" | "driver" | "carpooler";
+
 const Signup = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -20,7 +23,7 @@ const Signup = () => {
     confirmPassword: "",
     idNumber: "",
     driversLicense: "",
-    accountType: "renter" as "renter" | "carOwner" | "driver" | "carpooler" // Add explicit type annotation here
+    accountType: "renter" as AccountType // Use the defined type
   });
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +34,7 @@ const Signup = () => {
   const handleRadioChange = (value: string) => {
     setFormData(prev => ({ 
       ...prev, 
-      accountType: value as "renter" | "carOwner" | "driver" | "carpooler" 
+      accountType: value as AccountType 
     }));
   };
   
@@ -58,7 +61,7 @@ const Signup = () => {
     navigate("/login");
   };
   
-  const getAccountTypeDisplay = (type: string): string => {
+  const getAccountTypeDisplay = (type: AccountType): string => {
     switch (type) {
       case "carOwner": return "Car Owner";
       case "renter": return "Car Renter";
@@ -158,7 +161,7 @@ const Signup = () => {
                   placeholder="Enter your ID number"
                   value={formData.idNumber}
                   onChange={handleChange}
-                  required={formData.accountType !== "carpooler"}
+                  required={formData.accountType === "carOwner" || formData.accountType === "renter" || formData.accountType === "driver"}
                 />
               </div>
             )}
