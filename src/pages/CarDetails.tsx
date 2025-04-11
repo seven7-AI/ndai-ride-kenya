@@ -29,7 +29,6 @@ const CarDetails = () => {
   const [selectedDates, setSelectedDates] = useState({ start: "", end: "" });
   const [withDriver, setWithDriver] = useState(false);
   
-  // Find the car with the matching ID
   const car = allCars.find(car => car.id === id);
   
   if (!car) {
@@ -45,7 +44,6 @@ const CarDetails = () => {
   }
   
   const handleBooking = () => {
-    // In a real app, this would validate dates and process the booking
     toast({
       title: "Booking Request Submitted",
       description: `Your request to book the ${car.make} ${car.model} has been received.`,
@@ -57,7 +55,6 @@ const CarDetails = () => {
       <Navbar />
       
       <main className="flex-1 pb-16 md:pb-0">
-        {/* Back button */}
         <div className="container py-4">
           <Link to="/explore" className="inline-flex items-center text-ndai-600 hover:text-ndai-700">
             <ArrowLeft className="h-4 w-4 mr-1" />
@@ -65,7 +62,6 @@ const CarDetails = () => {
           </Link>
         </div>
         
-        {/* Car images */}
         <div className="container">
           <AspectRatio ratio={16/9} className="bg-muted rounded-xl overflow-hidden">
             <img 
@@ -76,10 +72,8 @@ const CarDetails = () => {
           </AspectRatio>
         </div>
         
-        {/* Car details */}
         <div className="container py-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main details */}
             <div className="lg:col-span-2">
               <div className="flex justify-between items-start">
                 <div>
@@ -172,7 +166,6 @@ const CarDetails = () => {
               </Tabs>
             </div>
             
-            {/* Booking card */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-xl border p-6 shadow-sm sticky top-20">
                 <h3 className="font-semibold text-xl mb-4">Book this car</h3>

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { MobileNav } from "@/components/MobileNav";
@@ -39,11 +38,9 @@ const Explore = () => {
   const [filteredCars, setFilteredCars] = useState<Car[]>(allCars);
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   
-  // Apply filters whenever filter criteria change
   useEffect(() => {
     let result = allCars;
     
-    // Apply search filter
     if (searchTerm) {
       result = result.filter(car => 
         `${car.make} ${car.model}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -51,34 +48,28 @@ const Explore = () => {
       );
     }
     
-    // Apply price range filter
     result = result.filter(car => 
       car.costPerDay >= priceRange[0] && car.costPerDay <= priceRange[1]
     );
     
-    // Apply category filter
     if (selectedCategory && selectedCategory !== "all") {
       result = result.filter(car => car.category === selectedCategory);
     }
     
-    // Apply type filter
     if (selectedType && selectedType !== "all") {
       result = result.filter(car => car.type === selectedType);
     }
     
-    // Apply driver preference filter
     if (withDriver !== null) {
       result = result.filter(car => car.withDriver === withDriver);
     }
     
-    // Apply transmission filter
     if (transmission && transmission !== "all") {
       result = result.filter(car => car.transmission === transmission);
     }
     
     setFilteredCars(result);
     
-    // Calculate active filters for display
     const filters: string[] = [];
     if (selectedCategory && selectedCategory !== "all") filters.push(`Category: ${selectedCategory}`);
     if (selectedType && selectedType !== "all") filters.push(`Type: ${selectedType}`);
@@ -123,7 +114,6 @@ const Explore = () => {
         <div className="container py-8">
           <h1 className="text-3xl font-bold mb-6">Explore Cars</h1>
           
-          {/* Search bar and filter button */}
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -255,7 +245,6 @@ const Explore = () => {
             </Popover>
           </div>
           
-          {/* Active filters */}
           {activeFilters.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-6">
               {activeFilters.map((filter, index) => (
@@ -281,14 +270,12 @@ const Explore = () => {
             </div>
           )}
           
-          {/* Results count */}
           <div className="mb-6">
             <p className="text-gray-600">
               Showing {filteredCars.length} {filteredCars.length === 1 ? 'car' : 'cars'}
             </p>
           </div>
           
-          {/* Cars grid */}
           {filteredCars.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredCars.map(car => (

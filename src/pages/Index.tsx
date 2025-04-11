@@ -3,7 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { CarCard } from "@/components/CarCard";
 import { MobileNav } from "@/components/MobileNav";
-import { cars } from "@/data/cars";
+import { cars } from "@/data/cars"; // This import now comes from cars/index.ts
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
