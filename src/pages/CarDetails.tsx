@@ -1,4 +1,3 @@
-
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
@@ -22,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/use-toast";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const CarDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -67,13 +67,13 @@ const CarDetails = () => {
         
         {/* Car images */}
         <div className="container">
-          <div className="aspect-video bg-muted rounded-xl overflow-hidden">
+          <AspectRatio ratio={16/9} className="bg-muted rounded-xl overflow-hidden">
             <img 
               src={car.images[0]} 
               alt={`${car.make} ${car.model}`}
               className="w-full h-full object-cover"
             />
-          </div>
+          </AspectRatio>
         </div>
         
         {/* Car details */}

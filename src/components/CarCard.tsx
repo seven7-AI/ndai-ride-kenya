@@ -5,24 +5,30 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Star, Users, Calendar, CircleDollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface CarCardProps {
   car: Car;
 }
 
 export const CarCard = ({ car }: CarCardProps) => {
+  const isMobile = useIsMobile();
+  
   return (
-    <Card className="car-card">
+    <Card className="car-card h-full flex flex-col">
       <div className="relative">
-        <img 
-          src={car.images[0]} 
-          alt={`${car.make} ${car.model}`} 
-          className="car-image"
-        />
+        <AspectRatio ratio={isMobile ? 4/3 : 16/9}>
+          <img 
+            src={car.images[0]} 
+            alt={`${car.make} ${car.model}`} 
+            className="w-full h-full object-cover rounded-t-xl"
+          />
+        </AspectRatio>
         <Badge className="absolute top-2 right-2 bg-ndai-500">{car.category}</Badge>
       </div>
       
-      <CardHeader className="pb-2">
+      <CardHeader className="pb-2 flex-initial">
         <div className="flex justify-between items-start">
           <div>
             <h3 className="font-bold text-lg">{car.make} {car.model}</h3>
@@ -35,7 +41,7 @@ export const CarCard = ({ car }: CarCardProps) => {
         </div>
       </CardHeader>
       
-      <CardContent className="pb-2">
+      <CardContent className="pb-2 flex-1">
         <div className="grid grid-cols-2 gap-2 text-sm">
           <div className="flex items-center">
             <Users className="h-4 w-4 mr-1 text-ndai-500" />
@@ -65,7 +71,7 @@ export const CarCard = ({ car }: CarCardProps) => {
         </div>
       </CardContent>
       
-      <CardFooter>
+      <CardFooter className="flex-initial">
         <Link to={`/car/${car.id}`} className="w-full">
           <Button className="w-full bg-ndai-500 hover:bg-ndai-600">View Details</Button>
         </Link>

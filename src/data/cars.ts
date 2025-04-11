@@ -15,7 +15,7 @@ export const cars: Car[] = [
     costPerDay: 5000,
     category: 'Basic',
     type: 'Saloon',
-    images: ['/placeholder.svg'],
+    images: ['https://images.unsplash.com/photo-1590362891991-f776e747a588?q=80&w=800&auto=format&fit=crop'],
     location: 'Nairobi CBD',
     available: true,
     rating: 4.7,
@@ -44,7 +44,7 @@ export const cars: Car[] = [
     costPerDay: 6500,
     category: 'Basic',
     type: 'Saloon',
-    images: ['/placeholder.svg'],
+    images: ['https://images.unsplash.com/photo-1629293348422-63c8fb3f704e?q=80&w=800&auto=format&fit=crop'],
     location: 'Westlands, Nairobi',
     available: true,
     rating: 4.5,
@@ -74,7 +74,7 @@ export const cars: Car[] = [
     costPerDay: 8000,
     category: 'Basic',
     type: 'SUV',
-    images: ['/placeholder.svg'],
+    images: ['https://images.unsplash.com/photo-1581540222194-0def2dda95b8?q=80&w=800&auto=format&fit=crop'],
     location: 'Karen, Nairobi',
     available: true,
     rating: 4.8,
@@ -103,7 +103,7 @@ export const cars: Car[] = [
     costPerDay: 15000,
     category: 'Luxury',
     type: 'SUV',
-    images: ['/placeholder.svg'],
+    images: ['https://images.unsplash.com/photo-1561344640-1eb6b0d71ecc?q=80&w=800&auto=format&fit=crop'],
     location: 'Runda, Nairobi',
     available: true,
     rating: 4.9,
@@ -133,7 +133,7 @@ export const cars: Car[] = [
     costPerDay: 4000,
     category: 'Basic',
     type: 'Hatchback',
-    images: ['/placeholder.svg'],
+    images: ['https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=800&auto=format&fit=crop'],
     location: 'Kilimani, Nairobi',
     available: true,
     rating: 4.6,
@@ -163,7 +163,7 @@ export const cars: Car[] = [
     costPerDay: 20000,
     category: 'Luxury',
     type: 'Saloon',
-    images: ['/placeholder.svg'],
+    images: ['https://images.unsplash.com/photo-1549925862-990918131e85?q=80&w=800&auto=format&fit=crop'],
     location: 'Muthaiga, Nairobi',
     available: true,
     rating: 5.0,
@@ -193,7 +193,7 @@ export const cars: Car[] = [
     costPerDay: 9000,
     category: 'Basic',
     type: 'Pick up',
-    images: ['/placeholder.svg'],
+    images: ['https://images.unsplash.com/photo-1659359148124-2687697a4039?q=80&w=800&auto=format&fit=crop'],
     location: 'Industrial Area, Nairobi',
     available: true,
     rating: 4.7,
@@ -223,7 +223,7 @@ export const cars: Car[] = [
     costPerDay: 12000,
     category: 'Basic',
     type: 'Vans',
-    images: ['/placeholder.svg'],
+    images: ['https://images.unsplash.com/photo-1616455546586-887837111bbd?q=80&w=800&auto=format&fit=crop'],
     location: 'South B, Nairobi',
     available: true,
     rating: 4.6,
@@ -253,7 +253,7 @@ export const cars: Car[] = [
     costPerDay: 15000,
     category: 'Basic',
     type: 'Farm Machines',
-    images: ['/placeholder.svg'],
+    images: ['https://images.unsplash.com/photo-1658449635268-4d633b03797a?q=80&w=800&auto=format&fit=crop'],
     location: 'Nakuru',
     available: true,
     rating: 4.8,
@@ -283,7 +283,7 @@ export const cars: Car[] = [
     costPerDay: 18000,
     category: 'Souped up',
     type: 'Saloon',
-    images: ['/placeholder.svg'],
+    images: ['https://images.unsplash.com/photo-1638618164682-12b986ec2a90?q=80&w=800&auto=format&fit=crop'],
     location: 'Lavington, Nairobi',
     available: true,
     rating: 4.9,
@@ -308,11 +308,26 @@ export const generateMoreCars = (quantity: number): Car[] => {
   const baseColors = ['Red', 'Blue', 'Black', 'White', 'Silver', 'Gray', 'Green', 'Yellow', 'Orange', 'Brown'];
   const baseLocations = ['Nairobi CBD', 'Westlands', 'Karen', 'Kilimani', 'Lavington', 'South B', 'South C', 'Upperhill', 'Parklands', 'Kiambu Road'];
   
+  // Set of car images to use for generated cars
+  const carImages = [
+    'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1553440569-bcc63803a83d?q=80&w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1571127236794-81c0bbfe1ce3?q=80&w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1618093279252-9f15d7eac1e5?q=80&w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?q=80&w=800&auto=format&fit=crop',
+  ];
+  
   for (let i = 0; i < quantity; i++) {
     const baseCar = cars[i % cars.length];
     const randomYear = 2015 + Math.floor(Math.random() * 9); // 2015-2023
     const randomPrice = 3000 + Math.floor(Math.random() * 15000); // 3000-18000
     const randomRating = 3.5 + Math.random() * 1.5; // 3.5-5.0
+    const randomImage = carImages[Math.floor(Math.random() * carImages.length)];
     
     moreCars.push({
       ...baseCar,
@@ -323,6 +338,7 @@ export const generateMoreCars = (quantity: number): Car[] => {
       location: baseLocations[Math.floor(Math.random() * baseLocations.length)],
       rating: Math.round(randomRating * 10) / 10,
       withDriver: Math.random() > 0.5,
+      images: [randomImage],
       owner: {
         ...baseCar.owner,
         id: `eo${i + 11}`,

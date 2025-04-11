@@ -97,7 +97,7 @@
 
 @layer components {
   .car-card {
-    @apply bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300;
+    @apply bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full;
   }
   
   .car-image {
@@ -122,5 +122,16 @@
   
   .gradient-bg {
     @apply bg-gradient-to-r from-ndai-400 to-ndai-600;
+  }
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .container {
+    @apply px-4;
+  }
+  
+  .car-card {
+    @apply max-w-full;
   }
 }
