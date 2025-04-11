@@ -21,6 +21,14 @@ const Login = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
   
+  const handleDemoLogin = () => {
+    // Set demo account credentials
+    setFormData({
+      email: "arapbiisubmissions@gmail.com",
+      password: "4747"
+    });
+  };
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -88,6 +96,17 @@ const Login = () => {
             <div className="pt-2">
               <Button type="submit" className="w-full bg-ndai-500 hover:bg-ndai-600">
                 Log in
+              </Button>
+            </div>
+            
+            <div className="mt-2">
+              <Button 
+                type="button" 
+                variant="outline" 
+                className="w-full border-ndai-500 text-ndai-600 hover:bg-ndai-50"
+                onClick={handleDemoLogin}
+              >
+                Use Demo Account
               </Button>
             </div>
             

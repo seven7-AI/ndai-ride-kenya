@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const Signup = () => {
   const { toast } = useToast();
@@ -19,11 +20,16 @@ const Signup = () => {
     confirmPassword: "",
     idNumber: "",
     driversLicense: "",
+    accountType: "renter" // Default value
   });
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+  
+  const handleRadioChange = (value: string) => {
+    setFormData(prev => ({ ...prev, accountType: value }));
   };
   
   const handleSubmit = (e: React.FormEvent) => {
@@ -42,11 +48,21 @@ const Signup = () => {
     // In a real app, this would connect to an authentication service
     toast({
       title: "Account created successfully!",
-      description: "Your Ndai account has been created. You can now log in.",
+      description: `Your Ndai ${getAccountTypeDisplay(formData.accountType)} account has been created. You can now log in.`,
     });
     
     // Redirect to login page
     navigate("/login");
+  };
+  
+  const getAccountTypeDisplay = (type: string): string => {
+    switch (type) {
+      case "carOwner": return "Car Owner";
+      case "renter": return "Car Renter";
+      case "driver": return "Driver/Chauffeur";
+      case "carpooler": return "Carpooler";
+      default: return "User";
+    }
   };
   
   return (
@@ -66,6 +82,33 @@ const Signup = () => {
           </div>
           
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="accountType">Account Type</Label>
+              <RadioGroup 
+                defaultValue="renter" 
+                value={formData.accountType}
+                onValueChange={handleRadioChange}
+                className="grid grid-cols-1 gap-2 sm:grid-cols-2"
+              >
+                <div className="flex items-center space-x-2 rounded-md border p-3 hover:bg-muted">
+                  <RadioGroupItem value="carOwner" id="carOwner" />
+                  <Label htmlFor="carOwner" className="flex-1 cursor-pointer">Individual/Company (Car Owner)</Label>
+                </div>
+                <div className="flex items-center space-x-2 rounded-md border p-3 hover:bg-muted">
+                  <RadioGroupItem value="renter" id="renter" />
+                  <Label htmlFor="renter" className="flex-1 cursor-pointer">Car Hirer</Label>
+                </div>
+                <div className="flex items-center space-x-2 rounded-md border p-3 hover:bg-muted">
+                  <RadioGroupItem value="driver" id="driver" />
+                  <Label htmlFor="driver" className="flex-1 cursor-pointer">Chauffeur/Driver</Label>
+                </div>
+                <div className="flex items-center space-x-2 rounded-md border p-3 hover:bg-muted">
+                  <RadioGroupItem value="carpooler" id="carpooler" />
+                  <Label htmlFor="carpooler" className="flex-1 cursor-pointer">Carpooler</Label>
+                </div>
+              </RadioGroup>
+            </div>
+            
             <div className="space-y-2">
               <Label htmlFor="fullName">Full Name</Label>
               <Input
@@ -103,29 +146,33 @@ const Signup = () => {
               />
             </div>
             
-            <div className="space-y-2">
-              <Label htmlFor="idNumber">ID Number / Passport</Label>
-              <Input
-                id="idNumber"
-                name="idNumber"
-                placeholder="Enter your ID number"
-                value={formData.idNumber}
-                onChange={handleChange}
-                required
-              />
-            </div>
+            {(formData.accountType === "carOwner" || formData.accountType === "renter" || formData.accountType === "driver") && (
+              <div className="space-y-2">
+                <Label htmlFor="idNumber">ID Number / Passport</Label>
+                <Input
+                  id="idNumber"
+                  name="idNumber"
+                  placeholder="Enter your ID number"
+                  value={formData.idNumber}
+                  onChange={handleChange}
+                  required={formData.accountType !== "carpooler"}
+                />
+              </div>
+            )}
             
-            <div className="space-y-2">
-              <Label htmlFor="driversLicense">Driver's License Number</Label>
-              <Input
-                id="driversLicense"
-                name="driversLicense"
-                placeholder="Enter your driver's license number"
-                value={formData.driversLicense}
-                onChange={handleChange}
-                required
-              />
-            </div>
+            {(formData.accountType === "renter" || formData.accountType === "driver") && (
+              <div className="space-y-2">
+                <Label htmlFor="driversLicense">Driver's License Number</Label>
+                <Input
+                  id="driversLicense"
+                  name="driversLicense"
+                  placeholder="Enter your driver's license number"
+                  value={formData.driversLicense}
+                  onChange={handleChange}
+                  required={formData.accountType === "renter" || formData.accountType === "driver"}
+                />
+              </div>
+            )}
             
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
