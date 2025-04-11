@@ -32,10 +32,10 @@ import { Input } from "@/components/ui/input";
 const Explore = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [priceRange, setPriceRange] = useState([0, 20000]);
-  const [selectedCategory, setSelectedCategory] = useState<CarCategory | "">("");
-  const [selectedType, setSelectedType] = useState<BasicCarType | "">("");
+  const [selectedCategory, setSelectedCategory] = useState<CarCategory | "all">("all");
+  const [selectedType, setSelectedType] = useState<BasicCarType | "all">("all");
   const [withDriver, setWithDriver] = useState<boolean | null>(null);
-  const [transmission, setTransmission] = useState<TransmissionType | "">("");
+  const [transmission, setTransmission] = useState<TransmissionType | "all">("all");
   const [filteredCars, setFilteredCars] = useState<Car[]>(allCars);
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   
@@ -57,12 +57,12 @@ const Explore = () => {
     );
     
     // Apply category filter
-    if (selectedCategory) {
+    if (selectedCategory && selectedCategory !== "all") {
       result = result.filter(car => car.category === selectedCategory);
     }
     
     // Apply type filter
-    if (selectedType) {
+    if (selectedType && selectedType !== "all") {
       result = result.filter(car => car.type === selectedType);
     }
     
@@ -72,7 +72,7 @@ const Explore = () => {
     }
     
     // Apply transmission filter
-    if (transmission) {
+    if (transmission && transmission !== "all") {
       result = result.filter(car => car.transmission === transmission);
     }
     
@@ -80,10 +80,10 @@ const Explore = () => {
     
     // Calculate active filters for display
     const filters: string[] = [];
-    if (selectedCategory) filters.push(`Category: ${selectedCategory}`);
-    if (selectedType) filters.push(`Type: ${selectedType}`);
+    if (selectedCategory && selectedCategory !== "all") filters.push(`Category: ${selectedCategory}`);
+    if (selectedType && selectedType !== "all") filters.push(`Type: ${selectedType}`);
     if (withDriver !== null) filters.push(`${withDriver ? 'With Driver' : 'Self Drive'}`);
-    if (transmission) filters.push(`Transmission: ${transmission}`);
+    if (transmission && transmission !== "all") filters.push(`Transmission: ${transmission}`);
     if (priceRange[0] > 0 || priceRange[1] < 20000) {
       filters.push(`Price: KSh ${priceRange[0]} - KSh ${priceRange[1]}`);
     }
@@ -95,21 +95,21 @@ const Explore = () => {
   const clearFilters = () => {
     setSearchTerm("");
     setPriceRange([0, 20000]);
-    setSelectedCategory("");
-    setSelectedType("");
+    setSelectedCategory("all");
+    setSelectedType("all");
     setWithDriver(null);
-    setTransmission("");
+    setTransmission("all");
   };
   
   const removeFilter = (filter: string) => {
     if (filter.startsWith("Category:")) {
-      setSelectedCategory("");
+      setSelectedCategory("all");
     } else if (filter.startsWith("Type:")) {
-      setSelectedType("");
+      setSelectedType("all");
     } else if (filter === "With Driver" || filter === "Self Drive") {
       setWithDriver(null);
     } else if (filter.startsWith("Transmission:")) {
-      setTransmission("");
+      setTransmission("all");
     } else if (filter.startsWith("Price:")) {
       setPriceRange([0, 20000]);
     }
