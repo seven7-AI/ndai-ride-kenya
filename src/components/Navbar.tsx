@@ -9,7 +9,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { Car, User } from "@/components/ui/avatar";
+import { Car, User } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
