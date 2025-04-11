@@ -20,7 +20,7 @@ const Signup = () => {
     confirmPassword: "",
     idNumber: "",
     driversLicense: "",
-    accountType: "renter" // Default value
+    accountType: "renter" as "renter" | "carOwner" | "driver" | "carpooler" // Add explicit type annotation here
   });
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +29,10 @@ const Signup = () => {
   };
   
   const handleRadioChange = (value: string) => {
-    setFormData(prev => ({ ...prev, accountType: value }));
+    setFormData(prev => ({ 
+      ...prev, 
+      accountType: value as "renter" | "carOwner" | "driver" | "carpooler" 
+    }));
   };
   
   const handleSubmit = (e: React.FormEvent) => {
