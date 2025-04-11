@@ -174,7 +174,7 @@ const Explore = () => {
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Categories</SelectItem>
+                        <SelectItem value="all">All Categories</SelectItem>
                         <SelectItem value="Basic">Basic</SelectItem>
                         <SelectItem value="Luxury">Luxury</SelectItem>
                         <SelectItem value="Souped up">Souped Up</SelectItem>
@@ -193,7 +193,7 @@ const Explore = () => {
                         <SelectValue placeholder="Select type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Types</SelectItem>
+                        <SelectItem value="all">All Types</SelectItem>
                         <SelectItem value="Saloon">Saloon</SelectItem>
                         <SelectItem value="SUV">SUV</SelectItem>
                         <SelectItem value="Hatchback">Hatchback</SelectItem>
@@ -236,7 +236,7 @@ const Explore = () => {
                         <SelectValue placeholder="Select transmission" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Transmissions</SelectItem>
+                        <SelectItem value="all">All Transmissions</SelectItem>
                         <SelectItem value="Automatic">Automatic</SelectItem>
                         <SelectItem value="Manual">Manual</SelectItem>
                       </SelectContent>
